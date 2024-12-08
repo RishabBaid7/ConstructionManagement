@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 12px;
+  }
+  
+  th {
+    background-color: #4f46e5;
+    color: white;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #f9fafb;
+  }
+  
+  tr:hover {
+    background-color: #e5e7eb;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  

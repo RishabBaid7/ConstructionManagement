@@ -1,0 +1,90 @@
+<div class="min-h-screen bg-gray-100 p-6">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-indigo-700 mb-6">Vendor Management</h1>
+
+    <!-- Add Vendor Button -->
+    <button (click)="openAddVendorModal()"
+      class="bg-indigo-700 text-white px-4 py-2 rounded-lg hover:bg-indigo-800 mb-4">
+      Add Vendor
+    </button>
+
+    <!-- Vendors Table -->
+    <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+      <table class="min-w-full border-collapse border">
+        <thead class="bg-indigo-700 text-white">
+          <tr>
+            <th class="p-3 text-left">Vendor Name</th>
+            <th class="p-3 text-left">Contact Details</th>
+            <th class="p-3 text-left">Material Supplied</th>
+            <th class="p-3 text-left">Contract Terms</th>
+            <th class="p-3 text-left">Delivery Status</th>
+            <th class="p-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vendor of vendors" class="border-b hover:bg-gray-50">
+            <td class="p-3">{{ vendor.name }}</td>
+            <td class="p-3">{{ vendor.contactDetails }}</td>
+            <td class="p-3">{{ vendor.materialSupplied }}</td>
+            <td class="p-3">{{ vendor.contractTerms }}</td>
+            <td class="p-3">{{ vendor.deliveryStatus }}</td>
+            <td class="p-3 flex justify-center space-x-2">
+              
+              <button (click)="deleteVendor(vendor.id)"
+                class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add/Edit Vendor Modal -->
+  <div *ngIf="showVendorModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+      <h2 class="text-2xl font-bold text-indigo-700 mb-4">
+        {{ editingVendor ? 'Edit Vendor' : 'Add Vendor' }}
+      </h2>
+      <form (ngSubmit)="onSubmitVendor()">
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">Vendor Name</label>
+          <input type="text" [(ngModel)]="currentVendor.name" name="name" required
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">Contact Details</label>
+          <input type="text" [(ngModel)]="currentVendor.contactDetails" name="contactDetails" required
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">Material Supplied</label>
+          <input type="text" [(ngModel)]="currentVendor.materialSupplied" name="materialSupplied" required
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">Contract Terms</label>
+          <textarea [(ngModel)]="currentVendor.contractTerms" name="contractTerms" required
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 mb-2">Delivery Status</label>
+          <select [(ngModel)]="currentVendor.deliveryStatus" name="deliveryStatus" required
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="On Time">On Time</option>
+            <option value="Delayed">Delayed</option>
+          </select>
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" (click)="closeVendorModal()" class="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">
+            Cancel
+          </button>
+          <button type="submit" class="bg-indigo-700 text-white px-4 py-2 rounded hover:bg-indigo-800">
+            {{ editingVendor ? 'Update Vendor' : 'Add Vendor' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

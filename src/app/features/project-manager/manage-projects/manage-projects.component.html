@@ -1,0 +1,53 @@
+<div class="min-h-screen bg-gray-100 p-6">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-indigo-700 mb-6">Manage Projects</h1>
+
+    <!-- Table Section -->
+    <div class="overflow-x-auto bg-white shadow-lg rounded-lg p-4">
+      <table class="table-auto w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-indigo-700 text-white">
+            <th class="px-4 py-3">Project ID</th>
+            <th class="px-4 py-3">Project Name</th>
+            <th class="px-4 py-3">Location</th>
+            <th class="px-4 py-3">Start Date</th>
+            <th class="px-4 py-3">End Date</th>
+            <th class="px-4 py-3">Budget</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projects" class="odd:bg-gray-100 even:bg-white hover:bg-gray-200">
+            <td class="px-4 py-3">{{ project.id }}</td> <!-- Display project ID -->
+            <td class="px-4 py-3">{{ project.name }}</td>
+            <td class="px-4 py-3">{{ project.location }}</td>
+            <td class="px-4 py-3">{{ project.startDate | date }}</td>
+            <td class="px-4 py-3">{{ project.endDate | date }}</td>
+            <td class="px-4 py-3">₹{{ project.budget }}</td>
+            <td class="px-4 py-3 font-semibold" [ngClass]="{
+                  'text-green-600': project.status === 'Completed',
+                  'text-yellow-600': project.status === 'In Progress',
+                  'text-red-600': project.status === 'Not Started',
+                  'text-orange-500': project.status === 'On Hold'
+            }">{{ project.status}}</td>
+            <td class="px-4 py-3">
+              <button
+                class="bg-blue-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-blue-600"
+                [routerLink]="['/project', project.id]"
+              >
+                View
+              </button>
+              <button
+                class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600"
+                (click)="deleteProject(project.id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

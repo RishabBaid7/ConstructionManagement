@@ -1,0 +1,46 @@
+<div class="min-h-screen bg-gray-50 p-6 flex flex-col items-center">
+  <!-- Project Overview Section -->
+  <div class="bg-white shadow-xl rounded-lg p-8 mb-8 w-full max-w-3xl">
+    <h1 class="text-4xl font-bold text-indigo-700 mb-4">{{ project?.name }}</h1>
+    <p class="text-gray-700 text-lg mb-2">
+      <strong class="font-semibold">Location:</strong> {{ project?.location }}
+    </p>
+    <p class="text-gray-700 text-lg mb-2">
+      <strong class="font-semibold">Start Date:</strong> {{ project?.startDate | date: 'longDate' }}
+    </p>
+    <p class="text-gray-700 text-lg mb-2">
+      <strong class="font-semibold">End Date:</strong> {{ project?.endDate | date: 'longDate' }}
+    </p>
+    <p class="text-gray-700 text-lg mb-2">
+      <strong class="font-semibold">Budget:</strong> ₹{{ project?.budget | number }}
+    </p>
+    <p class="text-gray-700 text-lg mb-2">
+      <strong class="font-semibold">Status:</strong> {{ project?.status }}
+    </p>
+
+    <!-- View Report Button -->
+    
+  </div>
+
+  <!-- Navigation Section -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl">
+    <button
+      class="w-full bg-indigo-600 text-white py-3 px-6 rounded-xl shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition duration-200"
+      [routerLink]="['/project', project?.id, 'manage-materials']"
+    >
+      View Materials
+    </button>
+    <button
+      class="w-full bg-blue-600 text-white py-3 px-6 rounded-xl shadow-lg hover:bg-blue-700 transform hover:scale-105 transition duration-200"
+      [routerLink]="['/project', project?.id, 'manage-tasks']"
+    >
+      Manage Tasks
+    </button>
+    <button
+      class="w-full bg-green-600 text-white py-3 px-6 rounded-xl shadow-lg hover:bg-green-700 transform hover:scale-105 transition duration-200"
+      [routerLink]="['/project', project?.id, 'manage-budget']"
+    >
+      Manage Budget
+    </button>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="min-h-screen bg-gray-100 p-6">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-3xl font-bold text-indigo-700 mb-6">Manage Workforce</h1>
+
+    <!-- Add Worker Button -->
+    <div class="flex justify-end mb-4">
+      <button class="bg-indigo-700 text-white px-4 py-2 rounded-lg hover:bg-indigo-800" (click)="openAddWorkerModal()">
+        Add Worker
+      </button>
+    </div>
+
+    <!-- Add Worker Form Modal -->
+    <div *ngIf="isAddWorkerModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+        <h2 class="text-2xl font-bold text-indigo-700 mb-4">Add Worker</h2>
+        <form (ngSubmit)="addWorker()">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Project ID</label>
+            <input [(ngModel)]="newWorker.projectId" name="projectId" type="text"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Task ID</label>
+            <input [(ngModel)]="newWorker.taskId" name="taskId" type="text"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Role</label>
+            <input [(ngModel)]="newWorker.role" name="role" type="text"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Attendance Status</label>
+            <input [(ngModel)]="newWorker.attendanceStatus" name="attendanceStatus" type="text"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Performance Rating</label>
+            <input [(ngModel)]="newWorker.performanceRating" name="performanceRating" type="number"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg" required min="0" max="10" />
+          </div>
+          <div class="flex justify-end">
+            <button type="button" (click)="closeAddWorkerModal()"
+              class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2 hover:bg-gray-600">
+              Cancel
+            </button>
+            <button type="submit" class="bg-indigo-700 text-white px-4 py-2 rounded-lg hover:bg-indigo-800">
+              Add Worker
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Workforce Table -->
+    <div class="overflow-x-auto bg-white shadow-lg rounded-lg p-4">
+      <table class="table-auto w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-indigo-700 text-white">
+            <th class="px-4 py-3">#</th>
+            <th class="px-4 py-3">Worker ID</th>
+            <th class="px-4 py-3">Project Name</th>
+            <th class="px-4 py-3">Task Name</th>
+            <th class="px-4 py-3">Role</th>
+            <th class="px-4 py-3">Attendance</th>
+            <th class="px-4 py-3">Performance Rating</th>
+            <th class="px-4 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let worker of workforce; let i = index" class="odd:bg-gray-100 even:bg-white hover:bg-gray-200">
+            <td class="px-4 py-3">{{ i + 1 }}</td>
+            <td class="px-4 py-3">{{ worker.id }}</td>
+            <td class="px-4 py-3">{{ worker.projectName }}</td>
+            <td class="px-4 py-3">{{ worker.taskName }}</td>
+            <td class="px-4 py-3">{{ worker.role }}</td>
+            <td class="px-4 py-3">{{ worker.attendanceStatus }}</td>
+            <td class="px-4 py-3">{{ worker.performanceRating }}/10</td>
+            <td class="px-4 py-3">
+              <!-- <button class="bg-blue-500 text-white px-3 py-1 rounded-lg mr-2 hover:bg-blue-600"
+                (click)="editWorker(worker)">Edit</button> -->
+              <button class="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600"
+                (click)="deleteWorker(worker.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

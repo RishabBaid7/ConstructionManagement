@@ -1,0 +1,13 @@
+/* Ensure Toastr position is set for the top-right */
+.toast-top-right {
+    top: 20px !important;  /* Override top positioning */
+    right: 20px !important; /* Override right positioning */
+    left: auto !important;
+    bottom: auto !important;
+  }
+  
+  .toast {
+    border-radius: 10px; /* Optional: Style for rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+  }
+  

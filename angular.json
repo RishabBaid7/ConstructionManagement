@@ -39,7 +39,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/tailwindcss/tailwind.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -110,5 +111,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b89e992b-160b-4e71-b8ba-e7d012cdfebb"
   }
 }
