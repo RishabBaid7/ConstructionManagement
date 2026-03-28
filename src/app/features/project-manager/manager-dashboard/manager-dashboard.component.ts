@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-manager-dashboard',
@@ -31,7 +32,7 @@ export class ManagerDashboardComponent implements OnInit {
     });
 
     this.http
-      .get<any>('https://localhost:7050/api/Project/all', { headers })
+      .get<any>(`${environment.apiUrl}/Project/all`, { headers })
       .subscribe({
         next: (response) => {
           this.projects = response.projects || [];

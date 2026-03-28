@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-vendor-management',
@@ -30,7 +31,7 @@ export class VendorManagementComponent implements OnInit {
 
   fetchVendors(): void {
     this.http
-      .get<any[]>('https://localhost:7050/api/Vendor/all', {
+      .get<any[]>(`${environment.apiUrl}/Vendor/all`, {
         headers: {
           Authorization: `Bearer ${this.token}`,
           accept: '*/*',
@@ -77,7 +78,7 @@ export class VendorManagementComponent implements OnInit {
     };
 
     this.http
-      .post('https://localhost:7050/api/Vendor/create', vendorToSend, {
+      .post(`${environment.apiUrl}/Vendor/create`, vendorToSend, {
         headers: {
           Authorization: `Bearer ${this.token}`,
           'Content-Type': 'application/json',
@@ -103,7 +104,7 @@ export class VendorManagementComponent implements OnInit {
         accept: '*/*',
       });
 
-      const url = `https://localhost:7050/api/Vendor/${vendorId}`;
+      const url = `${environment.apiUrl}/Vendor/${vendorId}`;
 
       // Optimistically remove the vendor from the list
       this.vendors = this.vendors.filter(vendor => vendor.id !== vendorId);

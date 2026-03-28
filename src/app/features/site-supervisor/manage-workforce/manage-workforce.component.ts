@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-manage-workforce',
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ManageWorkforceComponent {
   workforce: any[] = [];
-  apiUrl = 'https://localhost:7050/api/Workforce';
+  apiUrl = `${environment.apiUrl}/Workforce`;
   isAddWorkerModalOpen = false;
   newWorker = {
     projectId: '',

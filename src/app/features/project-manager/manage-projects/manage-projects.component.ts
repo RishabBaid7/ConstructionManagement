@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-manage-projects',
@@ -17,7 +18,7 @@ export class ManageProjectsComponent implements OnInit {
 
     if (token) {
       // Fetching projects from backend API with token in the Authorization header
-      this.http.get<any>('https://localhost:7050/api/Project/all', {
+      this.http.get<any>(`${environment.apiUrl}/Project/all`, {
         headers: {
           accept: '*/*',
           Authorization: `Bearer ${token}` // Add token dynamically
@@ -48,7 +49,7 @@ export class ManageProjectsComponent implements OnInit {
   
       // Call backend API to delete the project
       this.http
-        .delete(`https://localhost:7050/api/Project/${projectId}`, {
+        .delete(`${environment.apiUrl}/Project/${projectId}`, {
           headers: new HttpHeaders({
             accept: '*/*',
             Authorization: `Bearer ${token}`, // Add token dynamically

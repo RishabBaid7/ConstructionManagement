@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // Import HttpClient and HttpHeaders
 import { Location } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-manage-materials',
@@ -42,7 +43,7 @@ export class ManageMaterialsComponent implements OnInit {
         'Content-Type': 'application/json',
       });
 
-      const url = `https://localhost:7050/api/Material/project/${this.projectId}`;
+      const url = `${environment.apiUrl}/Material/project/${this.projectId}`;
       this.http.get<{ materials: any[] }>(url, { headers }).subscribe(
         (response) => {
           this.materials = response.materials;
@@ -85,7 +86,7 @@ export class ManageMaterialsComponent implements OnInit {
         'Content-Type': 'application/json',
       });
 
-      this.http.post('https://localhost:7050/api/Material/create', materialData, { headers }).subscribe(
+      this.http.post(`${environment.apiUrl}/Material/create`, materialData, { headers }).subscribe(
         (response: any) => {
           console.log('Material created successfully', response);
           this.fetchMaterials(); // Refresh materials list after adding
@@ -106,7 +107,7 @@ export class ManageMaterialsComponent implements OnInit {
         'Content-Type': 'application/json',
       });
   
-      const url = `https://localhost:7050/api/Material/${id}`;
+      const url = `${environment.apiUrl}/Material/${id}`;
       
       // Optimistically remove the material from the list
       this.materials = this.materials.filter(material => material.id !== id);

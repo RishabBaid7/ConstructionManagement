@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; // Import HttpHeaders for setting headers
 import { Location } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-project-details',
@@ -29,7 +30,7 @@ export class ProjectDetailsComponent implements OnInit {
     });
 
     // Call the API to fetch project details by ID with the Authorization header
-    this.http.get(`https://localhost:7050/api/Project/${projectId}`, { headers }).subscribe(
+    this.http.get(`${environment.apiUrl}/Project/${projectId}`, { headers }).subscribe(
       (response: any) => {
         this.project = response; // Set the response as the project details
       },

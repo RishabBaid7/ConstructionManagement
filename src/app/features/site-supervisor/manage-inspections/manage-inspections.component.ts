@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 interface Inspection {
   id: string;
@@ -45,7 +46,7 @@ export class ManageInspectionsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     this.http
-      .get<{ inspections: Inspection[] }>('https://localhost:7050/api/SafetyInspection/all', { headers })
+      .get<{ inspections: Inspection[] }>(`${environment.apiUrl}/SafetyInspection/all`, { headers })
       .subscribe(
         (response) => {
           this.inspections = response.inspections;
@@ -94,7 +95,7 @@ export class ManageInspectionsComponent implements OnInit {
     // Sending POST request to create a new inspection
     if (this.isEditing) {
       this.http
-        .put(`https://localhost:7050/api/SafetyInspection/update/${newInspection.id}`, newInspection, { headers })
+        .put(`${environment.apiUrl}/SafetyInspection/update/${newInspection.id}`, newInspection, { headers })
         .subscribe(
           (response) => {
             this.fetchInspections(); // Re-fetch the updated list of inspections
@@ -106,7 +107,7 @@ export class ManageInspectionsComponent implements OnInit {
         );
     } else {
       this.http
-        .post('https://localhost:7050/api/SafetyInspection/create', newInspection, { headers })
+        .post(`${environment.apiUrl}/SafetyInspection/create`, newInspection, { headers })
         .subscribe(
           (response) => {
             this.inspections.push(response as Inspection);
@@ -129,7 +130,7 @@ export class ManageInspectionsComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     this.http
-      .delete(`https://localhost:7050/api/SafetyInspection/delete/${inspectionId}`, { headers })
+      .delete(`${environment.apiUrl}/SafetyInspection/delete/${inspectionId}`, { headers })
       .subscribe(
         () => {
           this.inspections = this.inspections.filter((inspection) => inspection.id !== inspectionId);

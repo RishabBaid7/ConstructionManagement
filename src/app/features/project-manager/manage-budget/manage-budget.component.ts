@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 // Define interface for Expense
 interface Expense {
@@ -45,7 +46,7 @@ export class ManageBudgetComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     
     this.http
-      .get( `https://localhost:7050/api/Finance/all`, { headers })
+      .get( `${environment.apiUrl}/Finance/all`, { headers })
       .subscribe((data: any) => {
         console.log(data);
         this.expenses = data.finance; // Assuming the response contains an expenses array
@@ -83,7 +84,7 @@ export class ManageBudgetComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
   
     // Make the POST request
-    this.http.post('https://localhost:7050/api/Finance/create', expense, { headers }).subscribe(
+    this.http.post(`${environment.apiUrl}/Finance/create`, expense, { headers }).subscribe(
       (response) => {
         console.log('Expense added successfully:', response);
   

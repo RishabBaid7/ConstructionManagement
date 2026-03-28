@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-create-project',
@@ -44,7 +45,7 @@ export class CreateProjectComponent {
 
     // Send POST request to the backend
     this.http
-      .post('https://localhost:7050/api/project/create', this.project, { headers })
+      .post(`${environment.apiUrl}/project/create`, this.project, { headers })
       .subscribe({
         next: (response: any) => {
           console.log('Project created successfully:', response);

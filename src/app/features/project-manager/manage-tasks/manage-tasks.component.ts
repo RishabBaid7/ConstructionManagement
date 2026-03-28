@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-manage-tasks',
@@ -39,7 +40,7 @@ export class ManageTasksComponent implements OnInit {
 
   fetchTasks() {
     this.http
-      .get<any>(`https://localhost:7050/api/Task/all?projectId=${this.projectId}`, {
+      .get<any>(`${environment.apiUrl}/Task/all?projectId=${this.projectId}`, {
         headers: {
           accept: '*/*',
           Authorization: `Bearer ${this.token}`,
@@ -61,7 +62,7 @@ export class ManageTasksComponent implements OnInit {
     };
 
     this.http
-      .post('https://localhost:7050/api/Task/create', taskToSend, {
+      .post(`${environment.apiUrl}/Task/create`, taskToSend, {
         headers: { Authorization: `Bearer ${this.token}` },
       })
       .subscribe(
@@ -99,7 +100,7 @@ export class ManageTasksComponent implements OnInit {
     
       // Call backend API to delete the task
       this.http
-        .delete(`https://localhost:7050/api/Task/${taskId}`, {
+        .delete(`${environment.apiUrl}/Task/${taskId}`, {
           headers: new HttpHeaders({
             accept: '*/*',
             Authorization: `Bearer ${token}`, // Add token dynamically
